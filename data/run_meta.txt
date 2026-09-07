@@ -1,0 +1,9 @@
+seed=1001
+sea_level=0.0
+ice=1.0
+rainfall=1.0
+grid=80x60
+hex_count=4800
+hex_km=30
+geology_source=geology_hex.csv
+maps=03_climate_weather.png,04_ice_surface_water.png,05_water_table.png,06_soil.png,07_vegetation.png,08_resources.png,09_settlement_score.png
