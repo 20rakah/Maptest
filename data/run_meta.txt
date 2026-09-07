@@ -12,5 +12,6 @@ fingerprint=DRAIN_V3_ENDO_939
 packaging=Cartographer_climate_rejoin_rainshadow_patch
 rain_shadow_count=113
 dry_interior_count=862
-maps=09_settlement_score.png
+maps=01_plates_rock.png,02_elevation.png,02_elevation_slope.png,02_slope.png,03_climate_weather.png,04_ice_surface_water.png,05_water_table.png,06_soil.png,07_vegetation.png,08_resources.png,09_settlement_score.png,endorheic.png,glacial_scars.png,land_ocean.png,lithology.png,mountain_type.png
 water_vocab=surface labels + shallow_well|spring_line for groundwater-only
+stamp_commit=66b1ffc

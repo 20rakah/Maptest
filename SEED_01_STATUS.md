@@ -10,6 +10,7 @@
 | Scribe V1 (gazetteer TABLE patches) | Referee CLEAR |
 
 **Repo:** https://github.com/20rakah/Maptest  
+**Git stamp:** `66b1ffc`
 **GM entry:** `WORLD_SEED_01.md`  
 **Default seed:** 1001 · grid 80×60 @ 30 km/hex
 
