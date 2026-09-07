@@ -11,7 +11,7 @@
 | Inland-sea elev (CSV 63–67 m) | Referee CLEAR |
 | SETTLEMENTS table columns (149/149) | Referee CLEAR |
 
-**Git stamp:** `861565b`
+**Git stamp:** `2b67617`
 **Repo:** https://github.com/20rakah/Maptest
 **GM entry:** `WORLD_SEED_01.md`
 **Default seed:** 1001 · grid 80×60 @ 30 km/hex
