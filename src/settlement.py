@@ -21,6 +21,7 @@ def score_settlements(
     food: np.ndarray,
     ice: np.ndarray,
     veg: np.ndarray,
+    wt_class: np.ndarray | None = None,
 ) -> dict[str, np.ndarray]:
     h, w = elev_m.shape
     land = elev_m >= 0
@@ -114,7 +115,19 @@ def score_settlements(
                 continue
             parts = []
             if fresh[r, q]:
-                parts.append("fresh water")
+                # Distinguish surface water vs groundwater (Referee TABLE)
+                if int(water_code[r, q]) in (2, 3, 4, 5, 6):
+                    parts.append("fresh water")
+                elif wt_class is not None:
+                    wc = str(wt_class[r, q])
+                    if wc == "spring_line":
+                        parts.append("spring line")
+                    elif wc == "shallow_well":
+                        parts.append("shallow well")
+                    else:
+                        parts.append("groundwater")
+                else:
+                    parts.append("groundwater")
             if food[r, q] >= 2:
                 parts.append("strong food")
             elif food[r, q] >= 1:

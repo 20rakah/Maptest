@@ -11,3 +11,4 @@ climate_owner=Climate
 fingerprint=DRAIN_V3_ENDO_939
 packaging=Cartographer_climate_ingest
 maps=09_settlement_score.png
+water_vocab=surface labels + shallow_well|spring_line for groundwater-only
