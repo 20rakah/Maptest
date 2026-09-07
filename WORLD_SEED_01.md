@@ -1,5 +1,7 @@
 # World Seed 01 — GM pack
 
+**Status: STAMPED** (see `SEED_01_STATUS.md`). All Referee gates CLEAR.
+
 Open this folder (or the [Maptest](https://github.com/20rakah/Maptest) repo). You do **not** need to read Python.
 
 ## Start here
