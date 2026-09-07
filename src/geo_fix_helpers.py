@@ -63,7 +63,9 @@ def build_endorheic(elev, land, ocean, basin_dist):
     for r in range(h):
         for q in range(w):
             if cand[r, q]:
-                target = sill - 40.0 - 80.0 * max(0.0, 1.0 - float(basin_dist[r, q]))
+                # Keep floor above sea level so carve cannot create fake ocean contacts.
+                target = sill - 40.0 - 60.0 * max(0.0, 1.0 - float(basin_dist[r, q]))
+                target = max(target, 8.0)
                 if elev_out[r, q] > target:
                     elev_out[r, q] = target
     endo = cand & (elev_out < (sill - 5.0)) & land

@@ -5,7 +5,8 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 from . import config as C
-from .geology import ROCK_LABELS, _slope_m_per_km, apply_glacial_carving, build_elevation, build_plates_rock
+from .geology import ROCK_LABELS, apply_glacial_carving, build_elevation, build_plates_rock
+from .geo_fix_helpers import build_endorheic, slope_no_wrap
 from .ids import qr_to_id
 from .noise import fbm
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,6 +28,9 @@ ASSUMPTIONS = [
 "A12: glacial_scar tags are toy LGM heuristics.",
 "A13: geology_resource_tag rock-hosted only.",
 "A14: Seed 1001; sea_level_m=0; ice_mult=1.0.",
+"A15: Endorheic floor carved below land sill; ocean-adjacent ellipse cells excluded.",
+"A16: Slope uses in-bounds neighbours only (no toroidal wrap).",
+"A17: glacial=true iff glacial_scar is not none.",
 ]
 
 def _lgm_mask(elev, qf, rf):
@@ -76,7 +80,6 @@ def _glacial_scars(elev, elev_pre, slope, qf, rf, land, seed):
                 continue
             parts = []
             if lgm[r, q]:
-                glacial[r, q] = True
                 if elev[r, q] > 1400 and slope[r, q] > 25:
                     parts.append("hanging_valley")
                 if deepened[r, q] and slope[r, q] > 8:
@@ -91,6 +94,7 @@ def _glacial_scars(elev, elev_pre, slope, qf, rf, land, seed):
                     parts.append("rebound_coast")
             if not parts:
                 tags[r, q] = "none"
+                glacial[r, q] = False
             else:
                 uniq = list(dict.fromkeys(parts))
                 tags[r, q] = ";".join(uniq)
@@ -125,14 +129,19 @@ def export(seed=C.DEFAULT_SEED, sea_level_m=C.DEFAULT_SEA_LEVEL_M, ice_mult=C.DE
     elev_pack = build_elevation(seed, geo, sea_level_m)
     elev_pre = elev_pack["elev_m"].copy()
     elev = apply_glacial_carving(elev_pre, seed, ice_mult)
-    slope = _slope_m_per_km(elev)
     land = elev >= 0
     ocean = ~land
+    endorheic, elev = build_endorheic(elev, land, ocean, geo["basin_dist"])
+    land = elev >= 0
+    ocean = ~land
+    endorheic = endorheic & land
+    slope = slope_no_wrap(elev)
     rock = geo["rock"].copy()
     rock[ocean] = 0
+    rock[endorheic] = 6
     mountain = _mountain_type(geo["plate"], geo["suture_dist"]).copy()
     mountain[ocean] = "none"
-    endorheic = (geo["basin_dist"] < 1.0) & land
+    mountain[endorheic] = "none"
     scars, glacial = _glacial_scars(elev, elev_pre, slope, geo["qf"], geo["rf"], land, seed)
     resources = _resource_tag(rock, mountain, endorheic, land, seed)
     fields = ["id","q","r","elevation_m","slope","lithology","mountain_type","glacial_scar","glacial","endorheic","geology_resource_tag","plate","land"]
@@ -178,7 +187,7 @@ def export(seed=C.DEFAULT_SEED, sea_level_m=C.DEFAULT_SEA_LEVEL_M, ice_mult=C.DE
     _colourise_discrete(land.astype(np.int16), {0:(20,40,90),1:(140,170,110)}).save(MAPS/"land_ocean.png")
     (LEGENDS/"01_plates_rock.md").write_text("# 01_plates_rock\n\nWest/East craton, SE arc, northern rift, SW hotspot, ocean.\nASSUMPTION: N-S suture simplifies approved NW-SE spine.\n", encoding="utf-8")
     (LEGENDS/"02_elevation.md").write_text("# 02_elevation\n\nElevation m relative to sea_level_m=0. Glacial carving applied.\n", encoding="utf-8")
-    (LEGENDS/"02_slope.md").write_text("# 02_slope\n\nSlope = max axial-neighbour |d elev| / 30 km (m per km).\n", encoding="utf-8")
+    (LEGENDS/"02_slope.md").write_text("# 02_slope\n\nSlope = max in-bounds axial-neighbour |d elev| / 30 km (m per km). No wrap.\n", encoding="utf-8")
     (LEGENDS/"glacial_scars.md").write_text("# glacial_scars\n\nCyan = LGM scars present. CSV: glacial_scar tags + glacial true/false.\n", encoding="utf-8")
     (LEGENDS/"endorheic.md").write_text("# endorheic\n\nGold = closed central-east basin. Grey = exorheic land.\n", encoding="utf-8")
     (LEGENDS/"lithology.md").write_text("# lithology\n\n" + "\n".join(f"- {v}: {ROCK_LABELS.get(k,k)}" for k,v in ROCK_TO_LITH.items()) + "\n", encoding="utf-8")

@@ -14,3 +14,6 @@
 - A12: glacial_scar tags are toy LGM heuristics.
 - A13: geology_resource_tag rock-hosted only.
 - A14: Seed 1001; sea_level_m=0; ice_mult=1.0.
+- A15: Endorheic floor carved below land sill; ocean-adjacent ellipse cells excluded.
+- A16: Slope uses in-bounds neighbours only (no toroidal wrap).
+- A17: glacial=true iff glacial_scar is not none.
