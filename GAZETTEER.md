@@ -361,7 +361,7 @@ Adaptations the landform supports: salt-cutters / evaporite caravans; rim herder
 ### Landform
 Closed-basin deep floor (inland sea); dominant terrain `inland_sea` (inland_sea×174). Elev mean 66 m (range 63–67); slope mean 5.0, max 17.4. Lithology (geology_hex): `basin_sediment`. Mountain type mode: `none`. Glacial-scar hexes: 0 (post-LGM scars only; **no residual ice**).
 
-**A19 deep floor:** permanent inland sea on the carved basin floor (~60–120 m), with wetland fringe where sill meets water. Same closed catchment as the salt flats (Geology A19 / Climate C10–C12).
+**A19 deep floor:** permanent inland sea on the carved basin floor — hex `elev_m` **~63–67 m** (mean **~66 m** from CSV; n=174). Wetland fringe where sill meets water. Same closed catchment as the salt flats (Geology A19 / Climate C10–C12). **ASSUMPTION:** Climate C12 sill-threshold language (~63–67 m, CSV) is a climate rule-of-thumb, not hex elevation — do not confuse with CSV `elev_m`.
 
 ### Climate
 Temperate; arid closed-basin (dry_interior). Mean temp 13.1 °C (range 11.6–14.8); mean precip 402 mm (range 380–450). Wind mode `calm_interior`; seasonality `strong`. **rain_shadow** (orographic lee of suture ~q 0.42 and/or SE arc): 0 hexes (0%). **dry_interior** (closed-basin dryness, not lee orography): 174 hexes (100%). Source: Climate V1 (`climate_hex.csv` / signed calendar).
@@ -382,7 +382,7 @@ Adaptations the landform supports: lakeshore fishers on the closed sea; fringe r
 **steep_slope_corridor** — 50 hexes with slope>=8 (max 17.4); travel constrained to lower-slope gaps (e.g. H+45+23, H+53+23, H+57+31, H+58+29) **endorheic_closed_sea** — Closed A19 drainage; inland_sea=174 wetland=0; rivers terminate here — never the ocean (e.g. H+45+23, H+45+24, H+45+25, H+45+26) **dry_interior_basin** — 174 `dry_interior` hexes (closed-basin precip deficit, NOT rain_shadow) — brine/well logistics (e.g. H+45+23, H+45+24, H+45+25, H+45+26)
 
 ### Hooks
-1. **Stranded shoreline around endorheic inland sea** — Deep floor inland_sea (~60–120 m) with wetland fringe; closed A19 drainage Supporting hexes: H+45+23, H+45+24, H+45+25, H+45+26, H+45+27.
+1. **Stranded shoreline around endorheic inland sea** — Deep floor inland_sea (hex elev ~63–67 m / mean ~66 m) with wetland fringe; closed A19 drainage Supporting hexes: H+45+23, H+45+24, H+45+25, H+45+26, H+45+27.
 2. **Closed-basin dry_interior logistics** — dry_interior precip deficit inside endorheic mask — distinct from orographic rain_shadow Supporting hexes: H+45+23, H+45+24, H+45+25, H+45+26, H+45+27.
 
 ## Southeast Volcanic Arc
