@@ -248,7 +248,7 @@ Grouped by region. `shallow_well`/`spring_line` = drinkable groundwater. `wt_dep
 | H+56+39 | 56 | 39 | farmland | river | 1.5 | rich | false | false | none | fresh water, strong food, route access |
 | H+65+39 | 65 | 39 | farmland | river | 1.5 | rich | false | false | none | fresh water, strong food, route access |
 | H+65+40 | 65 | 40 | farmland | river | 1.5 | rich | false | false | none | fresh water, strong food, route access |
-| H+77+42 | 77 | 42 | farmland | shallow_well | 2.5 | rich | yes | false | obsidian | shallow well, strong food, route access |
+| H+77+42 | 77 | 42 | farmland | shallow_well | 2.5 | rich | true | false | obsidian | shallow well, strong food, route access |
 
 ### Southeast Craton Plains (`southeast-craton-plains`) — 4 city-candidates
 
