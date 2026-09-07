@@ -71,14 +71,14 @@ Not settlement sites — logistics hazards. Depths copied from hexes.csv.
 
 ## City-candidate sites (all 149)
 
-Grouped by region. `shallow_well`/`spring_line` = drinkable groundwater. `wt_depth_m` from data.
+Grouped by region. `shallow_well`/`spring_line` = drinkable groundwater. `wt_depth_m` from data. Multi-tag resources use `;` (not `|`) so markdown tables stay aligned — matches master hexes / Maptest.
 
 ### West Spine Windward Flank (`west-spine-windward-flank`) — 2 city-candidates
 
 | id | q | r | terrain | water | wt_depth_m | food | rain_shadow | dry_interior | resources | why |
 |---|---:|---:|---|---|---:|---|---|---|---|---|
-| H+24+48 | 24 | 48 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+24+53 | 24 | 53 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
+| H+24+48 | 24 | 48 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+24+53 | 24 | 53 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
 
 ### Northwest Spine Windward Flank (`northwest-spine-windward-flank`) — 0 city-candidates
 
@@ -92,122 +92,104 @@ Grouped by region. `shallow_well`/`spring_line` = drinkable groundwater. `wt_dep
 
 | id | q | r | terrain | water | wt_depth_m | food | rain_shadow | dry_interior | resources | why |
 |---|---:|---:|---|---|---:|---|---|---|---|---|
-| H+13+37 | 13 | 37 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+14+36 | 14 | 36 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+15+35 | 15 | 35 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+16+34 | 16 | 34 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+19+19 | 19 | 19 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+19+20 | 19 | 20 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+19+21 | 19 | 21 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+19+22 | 19 | 22 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+19+23 | 19 | 23 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+19+24 | 19 | 24 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+19+25 | 19 | 25 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+19+26 | 19 | 26 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+19+27 | 19 | 27 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+19+28 | 19 | 28 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+20+18 | 20 | 18 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+21+18 | 21 | 18 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+22+18 | 22 | 18 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+23+19 | 23 | 19 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+23+20 | 23 | 20 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+23+21 | 23 | 21 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+23+23 | 23 | 23 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+23+24 | 23 | 24 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+23+25 | 23 | 25 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+23+26 | 23 | 26 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+23+27 | 23 | 27 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+23+28 | 23 | 28 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+23+29 | 23 | 29 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+23+30 | 23 | 30 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
+| H+13+37 | 13 | 37 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+14+36 | 14 | 36 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+15+35 | 15 | 35 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+16+34 | 16 | 34 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+19+19 | 19 | 19 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+19+20 | 19 | 20 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+19+21 | 19 | 21 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+19+22 | 19 | 22 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+19+23 | 19 | 23 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+19+24 | 19 | 24 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+19+25 | 19 | 25 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+19+26 | 19 | 26 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+19+27 | 19 | 27 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+19+28 | 19 | 28 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+20+18 | 20 | 18 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+21+18 | 21 | 18 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+22+18 | 22 | 18 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+23+19 | 23 | 19 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+23+20 | 23 | 20 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+23+21 | 23 | 21 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+23+23 | 23 | 23 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+23+24 | 23 | 24 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+23+25 | 23 | 25 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+23+26 | 23 | 26 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+23+27 | 23 | 27 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+23+28 | 23 | 28 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+23+29 | 23 | 29 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+23+30 | 23 | 30 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
 
-### Northwest Farm Belt (`northwest-farm-belt`) — 1 city-candidate
+### Northwest Farm Belt (`northwest-farm-belt`) — 0 city-candidates
 
-| id | q | r | terrain | water | wt_depth_m | food | rain_shadow | dry_interior | resources | why |
-|---|---:|---:|---|---|---:|---|---|---|---|---|
-| H+09+36 | 9 | 36 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
+*None in this region.*
 
 ### Eastern Riverine Farm Corridors (`eastern-riverine-farm-corridors`) — 36 city-candidates
 
 | id | q | r | terrain | water | wt_depth_m | food | rain_shadow | dry_interior | resources | why |
 |---|---:|---:|---|---|---:|---|---|---|---|---|
-| H+43+46 | 43 | 46 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+43+47 | 43 | 47 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+43+48 | 43 | 48 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+43+49 | 43 | 49 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+44+45 | 44 | 45 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+45+45 | 45 | 45 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+46+45 | 46 | 45 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+47+37 | 47 | 37 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+47+42 | 47 | 42 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+47+46 | 47 | 46 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+48+37 | 48 | 37 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+48+42 | 48 | 42 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+48+45 | 48 | 45 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+49+37 | 49 | 37 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+49+39 | 49 | 39 | farmland | river | 1.5 | rich | ;;fisheries / greenstone_metals | fresh water, strong food, route access |
-| H+49+42 | 49 | 42 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+50+40 | 50 | 40 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+50+42 | 50 | 42 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+51+37 | 51 | 37 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+51+39 | 51 | 39 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+51+41 | 51 | 41 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+52+37 | 52 | 37 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+52+38 | 52 | 38 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+52+39 | 52 | 39 | farmland | river | 1.5 | rich | ;;greenstone_metals | fresh water, strong food, route access |
-| H+52+40 | 52 | 40 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+53+36 | 53 | 36 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+53+37 | 53 | 37 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+53+38 | 53 | 38 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+53+39 | 53 | 39 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+54+36 | 54 | 36 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+54+37 | 54 | 37 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+54+38 | 54 | 38 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+55+36 | 55 | 36 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+55+37 | 55 | 37 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+56+36 | 56 | 36 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+57+35 | 57 | 35 | farmland | spring_line | 2.5 | rich | ;;none | spring line, strong food, route access |
+| H+43+46 | 43 | 46 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+43+47 | 43 | 47 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+43+48 | 43 | 48 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+43+49 | 43 | 49 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+44+45 | 44 | 45 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+45+45 | 45 | 45 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+46+45 | 46 | 45 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+47+37 | 47 | 37 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+47+42 | 47 | 42 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+47+46 | 47 | 46 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+48+37 | 48 | 37 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+48+42 | 48 | 42 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+48+45 | 48 | 45 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+49+37 | 49 | 37 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+49+39 | 49 | 39 | farmland | river | 1.5 | rich |  |  | fisheries;greenstone_metals | fresh water, strong food, route access |
+| H+49+42 | 49 | 42 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+50+40 | 50 | 40 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+50+42 | 50 | 42 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+51+37 | 51 | 37 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+51+39 | 51 | 39 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+51+41 | 51 | 41 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+52+37 | 52 | 37 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+52+38 | 52 | 38 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+52+39 | 52 | 39 | farmland | river | 1.5 | rich |  |  | greenstone_metals | fresh water, strong food, route access |
+| H+52+40 | 52 | 40 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+53+36 | 53 | 36 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+53+37 | 53 | 37 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+53+38 | 53 | 38 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+53+39 | 53 | 39 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+54+36 | 54 | 36 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+54+37 | 54 | 37 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+54+38 | 54 | 38 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+55+36 | 55 | 36 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+55+37 | 55 | 37 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+56+36 | 56 | 36 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+57+35 | 57 | 35 | farmland | spring_line | 2.5 | rich |  |  | none | spring line, strong food, route access |
 
-### Inner Eastern Farm Corridors (`inner-eastern-farm-corridors`) — 15 city-candidates
+### Inner Eastern Farm Corridors (`inner-eastern-farm-corridors`) — 0 city-candidates
 
-| id | q | r | terrain | water | wt_depth_m | food | rain_shadow | dry_interior | resources | why |
-|---|---:|---:|---|---|---:|---|---|---|---|---|
-| H+45+16 | 45 | 16 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
-| H+46+16 | 46 | 16 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
-| H+50+16 | 50 | 16 | farmland | shallow_well | 2.5 | rich | ;;greenstone_metals | shallow well, strong food, route access |
-| H+51+16 | 51 | 16 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
-| H+52+16 | 52 | 16 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
-| H+53+16 | 53 | 16 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
-| H+54+18 | 54 | 18 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
-| H+55+16 | 55 | 16 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
-| H+55+18 | 55 | 18 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
-| H+56+18 | 56 | 18 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
-| H+57+16 | 57 | 16 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
-| H+57+18 | 57 | 18 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
-| H+58+16 | 58 | 16 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
-| H+58+17 | 58 | 17 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
-| H+58+18 | 58 | 18 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
+*None in this region.*
 
 ### Western Coastal Margin (`western-coastal-margin`) — 16 city-candidates
 
 | id | q | r | terrain | water | wt_depth_m | food | rain_shadow | dry_interior | resources | why |
 |---|---:|---:|---|---|---:|---|---|---|---|---|
-| H+16+55 | 16 | 55 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+17+54 | 17 | 54 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+19+49 | 19 | 49 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+19+52 | 19 | 52 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+19+55 | 19 | 55 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+20+51 | 20 | 51 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+20+54 | 20 | 54 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+20+57 | 20 | 57 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+21+50 | 21 | 50 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+21+53 | 21 | 53 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+22+49 | 22 | 49 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+22+52 | 22 | 52 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+22+57 | 22 | 57 | farmland | shallow_well | 2.5 | rich | ;;clay | shallow well, strong food, route access |
-| H+23+47 | 23 | 47 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+23+48 | 23 | 48 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+23+54 | 23 | 54 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
+| H+16+55 | 16 | 55 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+17+54 | 17 | 54 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+19+49 | 19 | 49 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+19+52 | 19 | 52 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+19+55 | 19 | 55 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+20+51 | 20 | 51 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+20+54 | 20 | 54 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+20+57 | 20 | 57 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+21+50 | 21 | 50 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+21+53 | 21 | 53 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+22+49 | 22 | 49 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+22+52 | 22 | 52 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+22+57 | 22 | 57 | farmland | shallow_well | 2.5 | rich |  |  | clay | shallow well, strong food, route access |
+| H+23+47 | 23 | 47 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+23+48 | 23 | 48 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+23+54 | 23 | 54 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
 
 ### Eastern Coastal Margin (`eastern-coastal-margin`) — 0 city-candidates
 
@@ -217,36 +199,36 @@ Grouped by region. `shallow_well`/`spring_line` = drinkable groundwater. `wt_dep
 
 | id | q | r | terrain | water | wt_depth_m | food | rain_shadow | dry_interior | resources | why |
 |---|---:|---:|---|---|---:|---|---|---|---|---|
-| H+49+54 | 49 | 54 | farmland | river | 1.5 | rich | ;;fisheries / clay | fresh water, strong food, route access |
-| H+50+54 | 50 | 54 | farmland | river | 1.5 | rich | ;;fisheries / clay | fresh water, strong food, route access |
-| H+50+57 | 50 | 57 | farmland | river | 1.5 | rich | ;;clay | fresh water, strong food, route access |
-| H+50+59 | 50 | 59 | farmland | river | 1.5 | rich | ;;clay | fresh water, strong food, route access |
-| H+51+54 | 51 | 54 | farmland | river | 1.5 | rich | ;;fisheries / clay | fresh water, strong food, route access |
-| H+51+55 | 51 | 55 | farmland | river | 1.5 | rich | ;;fisheries / clay | fresh water, strong food, route access |
-| H+51+56 | 51 | 56 | farmland | river | 1.5 | rich | ;;fisheries / clay | fresh water, strong food, route access |
-| H+51+57 | 51 | 57 | farmland | river | 1.5 | rich | ;;clay | fresh water, strong food, route access |
-| H+51+58 | 51 | 58 | farmland | river | 1.5 | rich | ;;clay | fresh water, strong food, route access |
-| H+51+59 | 51 | 59 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+52+52 | 52 | 52 | farmland | river | 1.5 | rich | ;;clay | fresh water, strong food, route access |
-| H+52+54 | 52 | 54 | farmland | river | 1.5 | rich | ;;fisheries / clay | fresh water, strong food, route access |
-| H+52+55 | 52 | 55 | farmland | river | 1.5 | rich | ;;fisheries / clay | fresh water, strong food, route access |
-| H+52+58 | 52 | 58 | farmland | river | 1.5 | rich | ;;clay | fresh water, strong food, route access |
-| H+52+59 | 52 | 59 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+53+53 | 53 | 53 | farmland | major_river | 1.5 | rich | ;;fisheries / clay | fresh water, strong food, route access, major river |
-| H+53+54 | 53 | 54 | farmland | major_river | 1.5 | rich | ;;fisheries / clay | fresh water, strong food, route access, major river |
-| H+53+55 | 53 | 55 | farmland | major_river | 1.5 | rich | ;;fisheries / clay | fresh water, strong food, route access, major river |
-| H+53+57 | 53 | 57 | farmland | major_river | 1.5 | rich | ;;fisheries / clay | fresh water, strong food, route access, major river |
-| H+53+58 | 53 | 58 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+53+59 | 53 | 59 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+54+54 | 54 | 54 | farmland | river | 1.5 | rich | ;;fisheries / clay | fresh water, strong food, route access |
-| H+54+58 | 54 | 58 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+54+59 | 54 | 59 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+55+56 | 55 | 56 | farmland | river | 1.5 | rich | ;;clay | fresh water, strong food, route access |
-| H+57+55 | 57 | 55 | farmland | river | 1.5 | rich | ;;clay | fresh water, strong food, route access |
-| H+57+56 | 57 | 56 | farmland | river | 1.5 | rich | ;;clay | fresh water, strong food, route access |
-| H+58+56 | 58 | 56 | farmland | river | 1.5 | rich | ;;clay | fresh water, strong food, route access |
-| H+58+57 | 58 | 57 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+59+56 | 59 | 56 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
+| H+49+54 | 49 | 54 | farmland | river | 1.5 | rich |  |  | fisheries;clay | fresh water, strong food, route access |
+| H+50+54 | 50 | 54 | farmland | river | 1.5 | rich |  |  | fisheries;clay | fresh water, strong food, route access |
+| H+50+57 | 50 | 57 | farmland | river | 1.5 | rich |  |  | clay | fresh water, strong food, route access |
+| H+50+59 | 50 | 59 | farmland | river | 1.5 | rich |  |  | clay | fresh water, strong food, route access |
+| H+51+54 | 51 | 54 | farmland | river | 1.5 | rich |  |  | fisheries;clay | fresh water, strong food, route access |
+| H+51+55 | 51 | 55 | farmland | river | 1.5 | rich |  |  | fisheries;clay | fresh water, strong food, route access |
+| H+51+56 | 51 | 56 | farmland | river | 1.5 | rich |  |  | fisheries;clay | fresh water, strong food, route access |
+| H+51+57 | 51 | 57 | farmland | river | 1.5 | rich |  |  | clay | fresh water, strong food, route access |
+| H+51+58 | 51 | 58 | farmland | river | 1.5 | rich |  |  | clay | fresh water, strong food, route access |
+| H+51+59 | 51 | 59 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+52+52 | 52 | 52 | farmland | river | 1.5 | rich |  |  | clay | fresh water, strong food, route access |
+| H+52+54 | 52 | 54 | farmland | river | 1.5 | rich |  |  | fisheries;clay | fresh water, strong food, route access |
+| H+52+55 | 52 | 55 | farmland | river | 1.5 | rich |  |  | fisheries;clay | fresh water, strong food, route access |
+| H+52+58 | 52 | 58 | farmland | river | 1.5 | rich |  |  | clay | fresh water, strong food, route access |
+| H+52+59 | 52 | 59 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+53+53 | 53 | 53 | farmland | major_river | 1.5 | rich |  |  | fisheries;clay | fresh water, strong food, route access, major river |
+| H+53+54 | 53 | 54 | farmland | major_river | 1.5 | rich |  |  | fisheries;clay | fresh water, strong food, route access, major river |
+| H+53+55 | 53 | 55 | farmland | major_river | 1.5 | rich |  |  | fisheries;clay | fresh water, strong food, route access, major river |
+| H+53+57 | 53 | 57 | farmland | major_river | 1.5 | rich |  |  | fisheries;clay | fresh water, strong food, route access, major river |
+| H+53+58 | 53 | 58 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+53+59 | 53 | 59 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+54+54 | 54 | 54 | farmland | river | 1.5 | rich |  |  | fisheries;clay | fresh water, strong food, route access |
+| H+54+58 | 54 | 58 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+54+59 | 54 | 59 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+55+56 | 55 | 56 | farmland | river | 1.5 | rich |  |  | clay | fresh water, strong food, route access |
+| H+57+55 | 57 | 55 | farmland | river | 1.5 | rich |  |  | clay | fresh water, strong food, route access |
+| H+57+56 | 57 | 56 | farmland | river | 1.5 | rich |  |  | clay | fresh water, strong food, route access |
+| H+58+56 | 58 | 56 | farmland | river | 1.5 | rich |  |  | clay | fresh water, strong food, route access |
+| H+58+57 | 58 | 57 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+59+56 | 59 | 56 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
 
 ### Endorheic Salt Flats (A19 Sill) (`endorheic-salt-flats`) — 0 city-candidates
 
@@ -260,22 +242,22 @@ Grouped by region. `shallow_well`/`spring_line` = drinkable groundwater. `wt_dep
 
 | id | q | r | terrain | water | wt_depth_m | food | rain_shadow | dry_interior | resources | why |
 |---|---:|---:|---|---|---:|---|---|---|---|---|
-| H+51+50 | 51 | 50 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+51+51 | 51 | 51 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+55+39 | 55 | 39 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+56+39 | 56 | 39 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+65+39 | 65 | 39 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+65+40 | 65 | 40 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+77+42 | 77 | 42 | farmland | shallow_well | 2.5 | rich | Y;;obsidian | shallow well, strong food, route access |
+| H+51+50 | 51 | 50 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+51+51 | 51 | 51 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+55+39 | 55 | 39 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+56+39 | 56 | 39 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+65+39 | 65 | 39 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+65+40 | 65 | 40 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+77+42 | 77 | 42 | farmland | shallow_well | 2.5 | rich | yes |  | obsidian | shallow well, strong food, route access |
 
 ### Southeast Craton Plains (`southeast-craton-plains`) — 4 city-candidates
 
 | id | q | r | terrain | water | wt_depth_m | food | rain_shadow | dry_interior | resources | why |
 |---|---:|---:|---|---|---:|---|---|---|---|---|
-| H+47+52 | 47 | 52 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+47+53 | 47 | 53 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
-| H+48+53 | 48 | 53 | farmland | river | 1.5 | rich | ;;greenstone_metals | fresh water, strong food, route access |
-| H+49+53 | 49 | 53 | farmland | river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access |
+| H+47+52 | 47 | 52 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+47+53 | 47 | 53 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
+| H+48+53 | 48 | 53 | farmland | river | 1.5 | rich |  |  | greenstone_metals | fresh water, strong food, route access |
+| H+49+53 | 49 | 53 | farmland | river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access |
 
 ### Northern Rift Corridor (`northern-rift-corridor`) — 0 city-candidates
 
@@ -289,21 +271,47 @@ Grouped by region. `shallow_well`/`spring_line` = drinkable groundwater. `wt_dep
 
 | id | q | r | terrain | water | wt_depth_m | food | rain_shadow | dry_interior | resources | why |
 |---|---:|---:|---|---|---:|---|---|---|---|---|
-| H+24+44 | 24 | 44 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
-| H+24+45 | 24 | 45 | farmland | major_river | 1.5 | rich | ;;fisheries | fresh water, strong food, route access, major river |
+| H+24+44 | 24 | 44 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
+| H+24+45 | 24 | 45 | farmland | major_river | 1.5 | rich |  |  | fisheries | fresh water, strong food, route access, major river |
 
 ### Western Craton Shield (`western-craton-shield`) — 8 city-candidates
 
 | id | q | r | terrain | water | wt_depth_m | food | rain_shadow | dry_interior | resources | why |
 |---|---:|---:|---|---|---:|---|---|---|---|---|
-| H+12+23 | 12 | 23 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+12+24 | 12 | 24 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+13+25 | 13 | 25 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+13+26 | 13 | 26 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+13+27 | 13 | 27 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+13+28 | 13 | 28 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
-| H+14+22 | 14 | 22 | farmland | shallow_well | 2.5 | rich | ;;none | shallow well, strong food, route access |
-| H+15+22 | 15 | 22 | farmland | river | 1.5 | rich | ;;none | fresh water, strong food, route access |
+| H+12+23 | 12 | 23 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+12+24 | 12 | 24 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+13+25 | 13 | 25 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+13+26 | 13 | 26 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+13+27 | 13 | 27 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+13+28 | 13 | 28 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+| H+14+22 | 14 | 22 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+| H+15+22 | 15 | 22 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
+
+### eastern-eastern-riverine-farm-corridors (`eastern-eastern-riverine-farm-corridors`) — 15 city-candidates
+
+| id | q | r | terrain | water | wt_depth_m | food | rain_shadow | dry_interior | resources | why |
+|---|---:|---:|---|---|---:|---|---|---|---|---|
+| H+45+16 | 45 | 16 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+| H+46+16 | 46 | 16 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+| H+50+16 | 50 | 16 | farmland | shallow_well | 2.5 | rich |  |  | greenstone_metals | shallow well, strong food, route access |
+| H+51+16 | 51 | 16 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+| H+52+16 | 52 | 16 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+| H+53+16 | 53 | 16 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+| H+54+18 | 54 | 18 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+| H+55+16 | 55 | 16 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+| H+55+18 | 55 | 18 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+| H+56+18 | 56 | 18 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+| H+57+16 | 57 | 16 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+| H+57+18 | 57 | 18 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+| H+58+16 | 58 | 16 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+| H+58+17 | 58 | 17 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+| H+58+18 | 58 | 18 | farmland | shallow_well | 2.5 | rich |  |  | none | shallow well, strong food, route access |
+
+### western-western-farm-belt (`western-western-farm-belt`) — 1 city-candidate
+
+| id | q | r | terrain | water | wt_depth_m | food | rain_shadow | dry_interior | resources | why |
+|---|---:|---:|---|---|---:|---|---|---|---|---|
+| H+09+36 | 9 | 36 | farmland | river | 1.5 | rich |  |  | none | fresh water, strong food, route access |
 
 ## Empty-but-excellent sites
 
