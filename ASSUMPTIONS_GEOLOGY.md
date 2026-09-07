@@ -17,5 +17,6 @@
 - A15: Endorheic floor carved below land sill; ocean-adjacent ellipse cells excluded.
 - A16: Slope uses in-bounds neighbours only (no toroidal wrap).
 - A17: glacial=true iff glacial_scar is not none.
-- A18: Non-endorheic land pit-filled via ocean priority-flood so steepest-descent reaches sea.
-- A19: Endorheic mask includes drainage catchment of closed basin; elev stored to 0.01 m.
+- A18: Non-endorheic land raise-only ocean spanning-tree so steepest-descent reaches sea (not classical priority-flood).
+- A19: Endorheic CSV mask = closed floor + high rim + spill catchment (~939); drainage tests MUST use this column (not config basin_dist alone). Elev to 0.01 m.
+- A21: basin_sediment lithology only inside endorheic mask; outside remapped to craton_granite_gneiss.
