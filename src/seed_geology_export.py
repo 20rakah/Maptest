@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image
 from . import config as C
 from .geology import ROCK_LABELS, apply_glacial_carving, build_elevation, build_plates_rock
-from .geo_fix_helpers import build_endorheic, slope_no_wrap
+from .geo_fix_helpers import enforce_drainage, slope_no_wrap, axial_neighbors
 from .ids import qr_to_id
 from .noise import fbm
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,6 +31,8 @@ ASSUMPTIONS = [
 "A15: Endorheic floor carved below land sill; ocean-adjacent ellipse cells excluded.",
 "A16: Slope uses in-bounds neighbours only (no toroidal wrap).",
 "A17: glacial=true iff glacial_scar is not none.",
+"A18: Non-endorheic land pit-filled via ocean priority-flood so steepest-descent reaches sea.",
+"A19: Endorheic mask includes drainage catchment of closed basin; elev stored to 0.01 m.",
 ]
 
 def _lgm_mask(elev, qf, rf):
@@ -131,10 +133,14 @@ def export(seed=C.DEFAULT_SEED, sea_level_m=C.DEFAULT_SEA_LEVEL_M, ice_mult=C.DE
     elev = apply_glacial_carving(elev_pre, seed, ice_mult)
     land = elev >= 0
     ocean = ~land
-    endorheic, elev = build_endorheic(elev, land, ocean, geo["basin_dist"])
+    elev, endorheic = enforce_drainage(elev, land, ocean, geo["basin_dist"])
     land = elev >= 0
     ocean = ~land
     endorheic = endorheic & land
+    for r in range(C.ROWS):
+        for q in range(C.COLS):
+            if endorheic[r, q] and any(ocean[rr, qq] for qq, rr in axial_neighbors(q, r, C.COLS, C.ROWS)):
+                endorheic[r, q] = False
     slope = slope_no_wrap(elev)
     rock = geo["rock"].copy()
     rock[ocean] = 0
@@ -150,7 +156,7 @@ def export(seed=C.DEFAULT_SEED, sea_level_m=C.DEFAULT_SEA_LEVEL_M, ice_mult=C.DE
         for q in range(C.COLS):
             rows.append({
                 "id": qr_to_id(q, r), "q": q, "r": r,
-                "elevation_m": int(round(float(elev[r, q]))),
+                "elevation_m": round(float(elev[r, q]), 2),
                 "slope": round(float(slope[r, q]), 3),
                 "lithology": ROCK_TO_LITH.get(int(rock[r, q]), "craton_granite_gneiss"),
                 "mountain_type": mountain[r, q],
