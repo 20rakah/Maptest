@@ -192,7 +192,7 @@ Dominant food `rich` (rich×80, good×63). Soil mode `loam`; vegetation mode `fl
 Present tags: `pasture`×63, `fisheries`×25, `greenstone_metals`×8, `stone`×1. (`none` on 51 hexes.)
 
 ### Who would live here
-Adaptations the landform supports: karst-spring settlement clusters; river-ford farmers / boat people; well-dependent dryland farmers; pasture herders.
+Adaptations the landform supports: river-ford farmers / boat people; well-dependent dryland farmers; pasture herders.
 
 ### Travel catch
 **steep_slope_corridor** — 29 hexes with slope>=8 (max 22.8); travel constrained to lower-slope gaps (e.g. H+43+35, H+44+35, H+45+35, H+45+36) **ford_or_river_crossing** — 50 river hexes (3 major_river); crossings where farmland/settlement meets channel (e.g. H+45+36, H+47+36, H+48+36, H+48+37) **groundwater_dependence** — 78 hexes with drinkable groundwater (`shallow_well`/`spring_line`) — not waterless; dry `none` hexes force routing to known wells/springs (e.g. H+48+38, H+48+39, H+48+41, H+48+43)
@@ -222,7 +222,7 @@ Dominant food `rich` (rich×62, none×30, good×14). Soil mode `loam`; vegetatio
 Present tags: `pasture`×14, `greenstone_metals`×3. (`none` on 90 hexes.)
 
 ### Who would live here
-Adaptations the landform supports: karst-spring settlement clusters; river-ford farmers / boat people; well-dependent dryland farmers; pasture herders.
+Adaptations the landform supports: river-ford farmers / boat people; well-dependent dryland farmers; pasture herders.
 
 ### Travel catch
 **steep_slope_corridor** — 20 hexes with slope>=8 (max 16.5); travel constrained to lower-slope gaps (e.g. H+41+24, H+42+23, H+57+22, H+54+21) **ford_or_river_crossing** — 6 river hexes (0 major_river); crossings where farmland/settlement meets channel (e.g. H+45+20, H+43+21, H+43+20, H+43+22) **groundwater_dependence** — 88 hexes with drinkable groundwater (`shallow_well`/`spring_line`) — not waterless; dry `none` hexes force routing to known wells/springs (e.g. H+44+16, H+44+17, H+44+18, H+45+18)
@@ -252,7 +252,7 @@ Dominant food `none` (none×258, good×89, rich×31, modest×22). Soil mode `san
 Present tags: `clay`×83, `fisheries`×36, `timber`×35, `pasture`×5, `greenstone_metals`×2. (`none` on 263 hexes.)
 
 ### Who would live here
-Adaptations the landform supports: karst-spring settlement clusters; river-ford farmers / boat people; well-dependent dryland farmers; pasture herders.
+Adaptations the landform supports: river-ford farmers / boat people; well-dependent dryland farmers; pasture herders.
 
 ### Travel catch
 **ford_or_river_crossing** — 95 river hexes (35 major_river); crossings where farmland/settlement meets channel (e.g. H+07+21, H+03+36, H+03+37, H+05+45) **groundwater_dependence** — 305 hexes with drinkable groundwater (`shallow_well`/`spring_line`) — not waterless; dry `none` hexes force routing to known wells/springs (e.g. H+07+13, H+07+14, H+07+15, H+07+16)
@@ -312,7 +312,7 @@ Dominant food `good` (good×51, rich×49). Soil mode `sandy coastal`; vegetation
 Present tags: `clay`×74, `pasture`×51, `fisheries`×21. (`none` on 6 hexes.)
 
 ### Who would live here
-Adaptations the landform supports: karst-spring settlement clusters; river-ford farmers / boat people; well-dependent dryland farmers; pasture herders.
+Adaptations the landform supports: river-ford farmers / boat people; well-dependent dryland farmers; pasture herders.
 
 ### Travel catch
 **steep_slope_corridor** — 2 hexes with slope>=8 (max 8.1); travel constrained to lower-slope gaps (e.g. H+57+58, H+56+58) **ford_or_river_crossing** — 38 river hexes (10 major_river); crossings where farmland/settlement meets channel (e.g. H+52+52, H+52+54, H+52+55, H+52+56) **groundwater_dependence** — 15 hexes with drinkable groundwater (`shallow_well`/`spring_line`) — not waterless; dry `none` hexes force routing to known wells/springs (e.g. H+56+57, H+56+58, H+57+58, H+59+57)
@@ -351,7 +351,7 @@ Adaptations the landform supports: salt-cutters / evaporite caravans; rim herder
 
 ### Hooks
 1. **Salt pan / evaporite sill gathering** — A19 catchment sill ~589 m: salt_pan + salt_pans resource; dry_interior basin dryness (not rain_shadow) Supporting hexes: H+29+00, H+29+01, H+29+02, H+29+03, H+29+04.
-2. **Failing / deep wells on rain_shadow lee margins** — wt_class=dry with wt_depth_m>=10 m — H+27+28=13.6m, H+27+29=13.6m, H+41+34=13.5m, H+28+29=13.5m, H+27+27=13.4m Supporting hexes: H+27+28, H+27+29, H+41+34, H+28+29, H+27+27.
+2. **Failing / deep wells on dry_interior salt-pan sill** — wt_class=dry on A19 salt_pan / dry_interior (not rain_shadow lee) with wt_depth_m>=10 m — H+27+28=13.6m, H+27+29=13.6m, H+41+34=13.5m, H+28+29=13.5m, H+27+27=13.4m Supporting hexes: H+27+28, H+27+29, H+41+34, H+28+29, H+27+27.
 
 ## Endorheic Inland Sea (A19 Floor)
 
@@ -406,7 +406,7 @@ Dominant food `good` (good×373, rich×63, none×26, modest×11). Soil mode `vol
 Present tags: `pasture`×263, `obsidian`×115, `timber`×72, `volcanic_host`×30, `fisheries`×18, `greenstone_metals`×3. (`none` on 100 hexes.)
 
 ### Who would live here
-Adaptations the landform supports: karst-spring settlement clusters; river-ford farmers / boat people; well-dependent dryland farmers; pasture herders.
+Adaptations the landform supports: river-ford farmers / boat people; well-dependent dryland farmers; pasture herders.
 
 ### Travel catch
 **steep_slope_corridor** — 31 hexes with slope>=8 (max 15.6); travel constrained to lower-slope gaps (e.g. H+55+48, H+56+47, H+64+56, H+65+56) **ford_or_river_crossing** — 42 river hexes (11 major_river); crossings where farmland/settlement meets channel (e.g. H+61+56, H+65+38, H+65+39, H+65+40) **groundwater_dependence** — 176 hexes with drinkable groundwater (`shallow_well`/`spring_line`) — not waterless; dry `none` hexes force routing to known wells/springs (e.g. H+61+36, H+61+37, H+61+38, H+61+39) **rain_shadow_lee** — 36 `rain_shadow` hexes (orographic lee of suture ~q 0.42 and/or SE arc) — water points control routes (e.g. H+75+51, H+75+50, H+75+49, H+75+48)
@@ -496,7 +496,7 @@ Dominant food `modest` (modest×88, good×19, none×10, rich×6). Soil mode `gla
 Present tags: `timber`×100, `clay`×33, `metals`×26, `stone`×13, `fisheries`×9, `gems`×8, `pasture`×3, `peat`×2. (`none` on 15 hexes.)
 
 ### Who would live here
-Adaptations the landform supports: karst-spring settlement clusters; river-ford farmers / boat people; well-dependent dryland farmers; windward timber-and-trap bands.
+Adaptations the landform supports: river-ford farmers / boat people; well-dependent dryland farmers; windward timber-and-trap bands.
 
 ### Travel catch
 **steep_slope_corridor** — 36 hexes with slope>=8 (max 16.1); travel constrained to lower-slope gaps (e.g. H+30+11, H+21+07, H+22+06, H+22+07) **ford_or_river_crossing** — 21 river hexes (0 major_river); crossings where farmland/settlement meets channel (e.g. H+27+11, H+25+14, H+28+11, H+18+02) **groundwater_dependence** — 100 hexes with drinkable groundwater (`shallow_well`/`spring_line`) — not waterless; dry `none` hexes force routing to known wells/springs (e.g. H+20+06, H+20+07, H+21+07, H+22+06)
@@ -556,7 +556,7 @@ Dominant food `good` (good×121, rich×12). Soil mode `loam`; vegetation mode `g
 Present tags: `pasture`×121, `greenstone_metals`×8. (`none` on 12 hexes.)
 
 ### Who would live here
-Adaptations the landform supports: karst-spring settlement clusters; river-ford farmers / boat people; well-dependent dryland farmers; pasture herders.
+Adaptations the landform supports: river-ford farmers / boat people; well-dependent dryland farmers; pasture herders.
 
 ### Travel catch
 **steep_slope_corridor** — 1 hexes with slope>=8 (max 9.7); travel constrained to lower-slope gaps (e.g. H+21+32) **ford_or_river_crossing** — 8 river hexes (0 major_river); crossings where farmland/settlement meets channel (e.g. H+15+22, H+12+23, H+12+24, H+13+25) **groundwater_dependence** — 120 hexes with drinkable groundwater (`shallow_well`/`spring_line`) — not waterless; dry `none` hexes force routing to known wells/springs (e.g. H+18+19, H+18+20, H+18+21, H+18+22)
