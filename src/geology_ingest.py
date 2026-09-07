@@ -81,31 +81,45 @@ def _str(row: dict, *keys: str, default: str = "") -> str:
     return default
 
 
-# Simple lithology string → rock int codes matching geology.ROCK_LABELS
-_LITHO_MAP = {
-    "oceanic": 0,
-    "basalt": 0,
-    "granite": 1,
-    "gneiss": 1,
-    "craton": 1,
-    "metamorphic": 2,
-    "suture": 2,
-    "andesite": 3,
-    "arc": 3,
-    "volcanic": 3,
-    "rift": 4,
-    "hotspot": 5,
-    "basin": 6,
-    "sediment": 6,
-    "alluvium": 6,
-    "coastal": 7,
-    "sandstone": 7,
+# Exact Geologist lithology strings → rock int codes (geology.ROCK_LABELS)
+_LITHO_EXACT = {
+    "oceanic_basalt": 0,
+    "craton_granite_gneiss": 1,
+    "suture_metamorphic": 2,
+    "arc_andesite_volcanic": 3,
+    "rift_volcanics": 4,
+    "hotspot_basalt": 5,
+    "basin_sediment": 6,
+    "coastal_sediment": 7,
 }
+
+# Fuzzy fallback: more-specific tokens BEFORE generic ones (basalt/sediment/volcanic).
+_LITHO_FUZZY = (
+    ("coastal", 7),
+    ("hotspot", 5),
+    ("rift", 4),
+    ("andesite", 3),
+    ("arc", 3),
+    ("suture", 2),
+    ("metamorphic", 2),
+    ("granite", 1),
+    ("gneiss", 1),
+    ("craton", 1),
+    ("basin", 6),
+    ("alluvium", 6),
+    ("sandstone", 7),
+    ("oceanic", 0),
+    ("sediment", 6),  # after coastal
+    ("volcanic", 3),  # after rift/hotspot
+    ("basalt", 0),  # after hotspot/oceanic
+)
 
 
 def lithology_to_rock_code(text: str) -> int:
-    t = text.lower()
-    for key, code in _LITHO_MAP.items():
+    t = text.lower().strip().replace(" ", "_").replace("/", "_")
+    if t in _LITHO_EXACT:
+        return _LITHO_EXACT[t]
+    for key, code in _LITHO_FUZZY:
         if key in t:
             return code
     return 1  # ASSUMPTION: unknown → craton granite
