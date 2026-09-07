@@ -10,7 +10,7 @@ Join key: `id` (`H{q:+03d}{r:+03d}`), grid 80×60, seed 1001, 30 km/hex.
 
 | Map | Contents |
 |-----|----------|
-| 03_climate_weather | Temp (red↔blue) + precip (green). Rain shadows east of suture/arc; dry endorheic interior. |
+| 03_climate_weather | Temp (red↔blue) + precip (green). **Orographic rain_shadow** = lee east of suture (~q 0.42) and SE arc (exorheic lee included). **dry_interior** = separate closed-basin dryness. |
 | 04_ice_surface_water | Ocean, rivers, lakes, **inland_sea** (deep basin floor), **salt_pan** (flat ~589 m sill), wetland, residual ice. |
 | 05_water_table | Legacy depth bands; prefer `wt_class` in climate_hex. |
 | 06_soil | Rock+climate+slope; includes saline playa on salt pans. |
@@ -24,8 +24,9 @@ Join key: `id` (`H{q:+03d}{r:+03d}`), grid 80×60, seed 1001, 30 km/hex.
 |--------|---------|
 | temp_c, precip_mm | Mean annual toy climate |
 | wind | windward / leeward / open_westerly / calm_interior / ocean_westerly |
-| rain_shadow | bool |
-| seasonality / season_label | 0–1 index; weak/moderate/strong/maritime |
+| rain_shadow | bool — **orographic lee only** of suture (~q 0.42) and/or SE arc (includes exorheic lee; not whole endorheic mask) |
+| dry_interior | bool — endorheic land with precip <550 mm (ASSUMPTION C23); closed-basin dryness, **not** lee orography |
+| seasonality / season_label | 0–1 index; weak/moderate/strong/maritime; boosted by rain_shadow **or** dry_interior |
 | water_code / water | 0 none, 1 ocean, 2 river, 3 major_river, 4 lake, 5 inland_sea, 6 wetland, 7 ice, **8 salt_pan** |
 | floodplain | bool overlay along rivers |
 | wt_class | **shallow_well \| spring_line \| dry \| marsh** (ASSUMPTION C15) |
@@ -43,4 +44,12 @@ Join key: `id` (`H{q:+03d}{r:+03d}`), grid 80×60, seed 1001, 30 km/hex.
 
 ## ASSUMPTION index
 
-See `ASSUMPTIONS_CLIMATE.md` (C1–C22). Guesses are labeled ASSUMPTION in code/docs.
+See `ASSUMPTIONS_CLIMATE.md` (C1–C23). Guesses are labeled ASSUMPTION in code/docs.
+
+## rain_shadow vs dry_interior
+
+- **rain_shadow**: lee east of the suture spine (~q 0.42) and/or SE volcanic arc under westerlies. Includes **exorheic** lee hexes. Subset of endorheic may overlap where basin rim sits in lee — but rain_shadow ≠ endorheic mask.
+- **dry_interior**: intentional dry closed-basin interior (ASSUMPTION C23 / C4 precip) inside the Geologist endorheic mask.
+- Map 03 description must match: east-of-suture/arc lee is rain_shadow; basin dryness is dry_interior.
+- See `ASSUMPTIONS_CLIMATE.md` (C1–C23).
+

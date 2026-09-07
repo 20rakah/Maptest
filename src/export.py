@@ -114,6 +114,7 @@ def build_rows(world: dict) -> list[dict]:
                     ),
                     "wt_class": str(world["wt_class"][r, q]),
                     "rain_shadow": bool(world["rain_shadow"][r, q]),
+                    "dry_interior": bool(world["dry_interior"][r, q]),
                     "floodplain": bool(world["floodplain"][r, q]),
                 }
             )
@@ -147,6 +148,7 @@ def build_climate_rows(world: dict) -> list[dict]:
                     "wind": wind_side,
                     "wind_strength": round(float(world["wind_strength"][r, q]), 3),
                     "rain_shadow": bool(world["rain_shadow"][r, q]),
+                    "dry_interior": bool(world["dry_interior"][r, q]),
                     "seasonality": round(float(world["seasonality"][r, q]), 3),
                     "season_label": str(world["season_label"][r, q]),
                     "water_code": wc,

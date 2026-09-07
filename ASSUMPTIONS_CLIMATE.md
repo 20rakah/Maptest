@@ -9,10 +9,10 @@ Climate-owned ASSUMPTIONs only. Geology ASSUMPTIONs live in `ASSUMPTIONS_GEOLOGY
 | C3 | Moisture pattern | Westerlies; wetter west/south coasts | Orography uses suture ~q 0.42 and SE arc |
 | C4 | Endorheic dryness | Endorheic mask ×0.55 precip; deep floor ×1.15 | Uses CSV `endorheic` (939 hexes), **not** config BASIN_CENTER (0.62,0.48). Centroid ~(0.45,0.51) |
 | C5 | Wind classes | windward / leeward / open_westerly / calm_interior / ocean_westerly | From elev east-gradient + basin |
-| C6 | Seasonality | 0.1–0.95 index → weak/moderate/strong | Higher inland, north, rain-shadow |
+| C6 | Seasonality | 0.1–0.95 index → weak/moderate/strong | Higher inland, north, rain-shadow **or** dry_interior |
 | C7 | Lapse rate | 6.5 °C/km | Earth-like |
 | C8 | Base precip | 850 mm/yr before orography | Multiplied by `--rainfall` |
-| C9 | Orographic / rain-shadow | gain 1.8; leeward retain ~0.35 | Toy |
+| C9 | Orographic / rain-shadow | gain 1.8; leeward retain ~0.35; **barrier fields**: suture ~q 0.42 + SE arc — windward west / lee east under westerlies | `rain_shadow` = suture/arc **lee only** (includes exorheic lee). Not cell-local gradient alone (flats zero/invert). |
 | C10 | Large-basin hydrology | Deep floor (<~120 m or ≪ sill) = inland_sea; flat sill ~589 m = salt_pan when dry — **not** whole 939 hexes as lake | Scales Geology A19 catchment |
 | C11 | River thresholds | accum ≥8 river; ≥28 major | Toy runoff units |
 | C12 | Inland sea threshold | elev ≤ sill−50 m or elev < 120 m inside endorheic | Permanent water only on carved floor |
@@ -26,5 +26,6 @@ Climate-owned ASSUMPTIONs only. Geology ASSUMPTIONs live in `ASSUMPTIONS_GEOLOGY
 | C20 | Vegetation follows soil+climate | Includes salt flat sparse (11) | No nations invented |
 | C21 | Climate resource belts | timber, pasture, salt_pans, fisheries (+ merged geology rock tags in `resources_merged`) | Primary Climate deliverable stops at resources |
 | C22 | Settlement score | Still computed for Cartographer packaging (map 09 / hexes.csv) — **Cartographer-owned**, not Climate narrative | Documented ownership split |
+| C23 | dry_interior vs rain_shadow | `rain_shadow` = orographic lee of suture (~q 0.42) and/or SE arc only; `dry_interior` = `endorheic & land & (precip<550)` after C4 | Closed-basin dryness is **not** lee-shadow. Do not fold dry_interior into rain_shadow. Seasonality may use `(rain_shadow | dry_interior)`. |
 
 **Source of truth:** `data/geology_hex.csv` fingerprint `DRAIN_V3_ENDO_939`. Do not trust stale climate columns in older `hexes.csv` until this Climate run overwrites maps 03–09 / climate tables.
