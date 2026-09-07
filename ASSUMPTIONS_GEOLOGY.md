@@ -17,3 +17,5 @@
 - A15: Endorheic floor carved below land sill; ocean-adjacent ellipse cells excluded.
 - A16: Slope uses in-bounds neighbours only (no toroidal wrap).
 - A17: glacial=true iff glacial_scar is not none.
+- A18: Non-endorheic land pit-filled via ocean priority-flood so steepest-descent reaches sea.
+- A19: Endorheic mask includes drainage catchment of closed basin; elev stored to 0.01 m.

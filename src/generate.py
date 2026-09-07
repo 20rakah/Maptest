@@ -80,6 +80,7 @@ def build_world(args: argparse.Namespace) -> dict:
         plate = geo_loaded["plate"]
         qf, rf = geo_loaded["qf"], geo_loaded["rf"]
         glacial = geo_loaded["glacial"]
+        glacial_scar = geo_loaded.get("glacial_scar")
         geo_res_tag = geo_loaded["geology_resource_tag"]
         # Optional: if Geologist did not carve, apply light toy carve only where glacial flagged
         # (do not invent conflicting geology — carving already in their elev)
@@ -104,6 +105,7 @@ def build_world(args: argparse.Namespace) -> dict:
             (geo["suture_dist"] < 1.2) & (elev > 800)
         )
         geo_res_tag = None
+        glacial_scar = None
         is_ocean = (elev < 0) & ~endorheic
         geology_source = "toy"
 
@@ -155,6 +157,7 @@ def build_world(args: argparse.Namespace) -> dict:
         "rf": rf,
         "endorheic": endorheic,
         "glacial": glacial,
+        "glacial_scar": glacial_scar,
         **climate,
         **surface,
         **wt,

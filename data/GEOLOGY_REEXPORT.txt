@@ -1,0 +1,6 @@
+reexport_utc=2026-09-07T08:25:56Z
+sha256=4505800c460d46f8deff78b76586c800a4331c1ad8910393cba4466936272881
+endorheic=939
+basin_sediment_outside_endo=0
+fingerprint=DRAIN_V3_ENDO_939
+NOTE=If endorheic==197 you have STALE mid-fix elev. Current endorheic must be 939.

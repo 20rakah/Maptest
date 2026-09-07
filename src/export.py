@@ -94,13 +94,20 @@ def build_rows(world: dict) -> list[dict]:
                     # extras
                     "q": q,
                     "r": r,
-                    "elev_m": round(elev, 1),
-                    "slope": round(slope, 2),
+                    # elev/slope: keep Geologist precision (2 dp) so hexes lockstep geology_hex
+                    "elev_m": round(elev, 2),
+                    "slope": round(slope, 3),
                     "precip": round(float(world["precip_mm"][r, q]), 1),
                     "temp_c": round(float(world["temp_c"][r, q]), 2),
                     "soil": SOIL_LABELS.get(int(world["soil"][r, q]), ""),
                     "vegetation": VEG_LABELS.get(veg, ""),
                     "rock": ROCK_LABELS.get(int(world["rock"][r, q]), ""),
+                    "endorheic": bool(world["endorheic"][r, q]),
+                    "glacial_scar": (
+                        str(world["glacial_scar"][r, q])
+                        if world.get("glacial_scar") is not None
+                        else ("" if not bool(world["glacial"][r, q]) else "glacial")
+                    ),
                 }
             )
     return rows

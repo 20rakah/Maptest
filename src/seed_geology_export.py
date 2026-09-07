@@ -33,6 +33,7 @@ ASSUMPTIONS = [
 "A17: glacial=true iff glacial_scar is not none.",
 "A18: Non-endorheic land pit-filled via ocean priority-flood so steepest-descent reaches sea.",
 "A19: Endorheic mask includes drainage catchment of closed basin; elev stored to 0.01 m.",
+"A21: basin_sediment lithology only inside endorheic mask; outside remapped to craton_granite_gneiss.",
 ]
 
 def _lgm_mask(elev, qf, rf):
@@ -145,6 +146,8 @@ def export(seed=C.DEFAULT_SEED, sea_level_m=C.DEFAULT_SEA_LEVEL_M, ice_mult=C.DE
     rock = geo["rock"].copy()
     rock[ocean] = 0
     rock[endorheic] = 6
+    # Trim basin_sediment outside endorheic (Referee TABLE)
+    rock[(~endorheic) & (rock == 6)] = 1  # ASSUMPTION: stray basin fill -> craton family
     mountain = _mountain_type(geo["plate"], geo["suture_dist"]).copy()
     mountain[ocean] = "none"
     mountain[endorheic] = "none"

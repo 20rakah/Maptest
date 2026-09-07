@@ -141,6 +141,8 @@ def load_geology_hex(data_dir: Path) -> dict[str, np.ndarray] | None:
     endorheic = np.zeros((C.ROWS, C.COLS), dtype=np.bool_)
     geo_res = np.empty((C.ROWS, C.COLS), dtype=object)
     geo_res.fill("")
+    glacial_scar = np.empty((C.ROWS, C.COLS), dtype=object)
+    glacial_scar.fill("")
     slope = np.full((C.ROWS, C.COLS), np.nan, dtype=np.float64)
     seen = 0
 
@@ -165,6 +167,11 @@ def load_geology_hex(data_dir: Path) -> dict[str, np.ndarray] | None:
             elif "rock_code" in row and row["rock_code"] not in (None, ""):
                 rock[r, q] = int(float(row["rock_code"]))
             plate[r, q] = int(_float(row, "plate", "plate_id", default=0))
+            scar_raw = row.get("glacial_scar")
+            if scar_raw is None or str(scar_raw).strip() == "":
+                glacial_scar[r, q] = ""
+            else:
+                glacial_scar[r, q] = str(scar_raw).strip()
             scar = row.get("glacial_scar") or row.get("glacial") or row.get("glacial_carved")
             s = "" if scar is None else str(scar).strip().lower()
             if s in ("", "0", "false", "no", "n", "none", "null"):
@@ -215,6 +222,7 @@ def load_geology_hex(data_dir: Path) -> dict[str, np.ndarray] | None:
         "rock": rock,
         "plate": plate,
         "glacial": glacial,
+        "glacial_scar": glacial_scar,
         "endorheic": endorheic,
         "geology_resource_tag": geo_res,
         "is_ocean": elev < 0,
