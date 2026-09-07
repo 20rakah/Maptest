@@ -1,6 +1,8 @@
 """Fixes for Referee HOLD on geology package."""
 from __future__ import annotations
 
+import heapq
+
 import numpy as np
 from . import config as C
 
@@ -78,3 +80,91 @@ def build_endorheic(elev, land, ocean, basin_dist):
                     endo[r, q] = False
                     break
     return endo, elev_out
+
+
+
+def priority_flood_to_ocean(elev, land, ocean, endorheic):
+    """Raise non-endorheic land pits so steepest-descent reaches ocean.
+
+    ASSUMPTION: Priority-flood fill from ocean; intentional endorheic interior skipped
+    then re-enforced below its rim. Exterior catchments that would spill into the basin
+    are filled toward ocean instead.
+    """
+    h, w = elev.shape
+    out = elev.astype(np.float64).copy()
+    filled = np.full((h, w), np.inf, dtype=np.float64)
+    visited = np.zeros((h, w), dtype=bool)
+    heap = []
+
+    for r in range(h):
+        for q in range(w):
+            if ocean[r, q]:
+                filled[r, q] = out[r, q]
+                visited[r, q] = True
+                heapq.heappush(heap, (filled[r, q], q, r))
+
+    while heap:
+        level, q, r = heapq.heappop(heap)
+        if level > filled[r, q] + 1e-9:
+            continue
+        for qq, rr in axial_neighbors(q, r, w, h):
+            if visited[rr, qq]:
+                continue
+            if endorheic[rr, qq]:
+                # Do not flood-fill through the closed basin
+                continue
+            if not land[rr, qq] and not ocean[rr, qq]:
+                continue
+            # Pit fill: cannot be lower than the spill path from ocean
+            cand = max(float(out[rr, qq]), float(level))
+            visited[rr, qq] = True
+            filled[rr, qq] = cand
+            out[rr, qq] = cand
+            heapq.heappush(heap, (cand, qq, rr))
+
+    # Any unvisited non-endorheic land (shouldn't happen if continent connected) — raise to neighbor spill
+    for r in range(h):
+        for q in range(w):
+            if land[r, q] and not endorheic[r, q] and not visited[r, q]:
+                # connected via land only; seed from nearest visited land/ocean neighbour max
+                neigh = [filled[rr, qq] for qq, rr in axial_neighbors(q, r, w, h) if visited[rr, qq]]
+                spill = min(neigh) if neigh else float(out[r, q])
+                out[r, q] = max(float(out[r, q]), spill)
+                filled[r, q] = out[r, q]
+                visited[r, q] = True
+
+    # Re-enforce closed basin: rim from surrounding non-endo land, floor below sill
+    rim = []
+    for r in range(h):
+        for q in range(w):
+            if not endorheic[r, q]:
+                continue
+            for qq, rr in axial_neighbors(q, r, w, h):
+                if land[rr, qq] and not endorheic[rr, qq]:
+                    rim.append(float(out[rr, qq]))
+    if rim and endorheic.any():
+        sill = min(rim)
+        # Boost rim cells slightly so exterior prefers ocean paths
+        for r in range(h):
+            for q in range(w):
+                if not endorheic[r, q]:
+                    continue
+                for qq, rr in axial_neighbors(q, r, w, h):
+                    if land[rr, qq] and not endorheic[rr, qq]:
+                        out[rr, qq] = max(float(out[rr, qq]), sill)
+        sill = min(
+            float(out[rr, qq])
+            for r in range(h)
+            for q in range(w)
+            if endorheic[r, q]
+            for qq, rr in axial_neighbors(q, r, w, h)
+            if land[rr, qq] and not endorheic[rr, qq]
+        )
+        for r in range(h):
+            for q in range(w):
+                if endorheic[r, q]:
+                    target = max(8.0, sill - 50.0)
+                    out[r, q] = min(float(out[r, q]), target)
+                    if out[r, q] >= sill - 5.0:
+                        out[r, q] = sill - 20.0
+    return out
