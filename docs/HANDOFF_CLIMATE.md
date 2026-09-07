@@ -21,7 +21,7 @@ See `lithology` column / legends.
 
 ## Endorheic basin (closed)
 - **Use CSV `endorheic=true` mask** (939 hexes, ~28% of land) — floor + high rim + spill catchment (**A19**).
-- Centroid (q/COLS, r/ROWS) ≈ **(0.45, 0.51)** — not config BASIN_CENTER (0.62, 0.48).
+- Centroid (q/COLS, r/ROWS) ≈ **(0.45, 0.51)** (measured from CSV `endorheic=true` hexes).
 - Ocean-adjacent: 0; does not steepest-descend to sea.
 - Drainage: all non-endorheic land steepest-descends to ocean.
 

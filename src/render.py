@@ -87,6 +87,7 @@ WATER_PALETTE = {
     5: (40, 110, 150),  # inland sea
     6: (90, 140, 100),  # wetland
     7: (230, 240, 255),  # ice
+    8: (235, 225, 190),  # salt pan / playa
 }
 
 WT_PALETTE = {
@@ -133,8 +134,13 @@ def render_all_layers(
     out_legends: Path,
     world: dict,
     write_geology_maps: bool,
+    write_climate_maps: bool = True,
 ) -> list[str]:
-    """Write PNGs; return list of map filenames written."""
+    """Write PNGs; return list of map filenames written.
+
+    When write_climate_maps is False (Climate-owned climate_hex present), only
+    settlement map 09 is written — maps 03–08 are left untouched.
+    """
     written: list[str] = []
     elev = world["elev_m"]
     slope = world["slope"]
@@ -186,127 +192,134 @@ def render_all_layers(
     clim[..., 1] = (40 + 180 * pnorm).astype(np.uint8)
     clim[..., 2] = (180 - 120 * tnorm).astype(np.uint8)
     clim[elev < 0] = (20, 50, 100)
-    name = "03_climate_weather.png"
-    _save_rgb(out_maps / name, clim)
-    written.append(name)
-    _legend_png(
-        out_legends / "03_climate_weather_legend.png",
-        "Climate (temp + precip)",
-        [
-            ((30, 40, 180), "Cold / dry-leaning (blue)"),
-            ((230, 100, 60), "Warm (more red)"),
-            ((100, 220, 100), "Wet (more green)"),
-            ((20, 50, 100), "Ocean"),
-        ],
-    )
+    if write_climate_maps:
+        name = "03_climate_weather.png"
+        _save_rgb(out_maps / name, clim)
+        written.append(name)
+        _legend_png(
+            out_legends / "03_climate_weather_legend.png",
+            "Climate (temp + precip)",
+            [
+                ((30, 40, 180), "Cold / dry-leaning (blue)"),
+                ((230, 100, 60), "Warm (more red)"),
+                ((100, 220, 100), "Wet (more green)"),
+                ((20, 50, 100), "Ocean"),
+            ],
+        )
 
-    # 04 ice + surface water
-    name = "04_ice_surface_water.png"
-    _save_rgb(out_maps / name, _colorize_codes(world["water_code"], WATER_PALETTE))
-    written.append(name)
-    _legend_png(
-        out_legends / "04_ice_surface_water_legend.png",
-        "Ice / Surface Water",
-        [
-            (WATER_PALETTE[0], "Dry land"),
-            (WATER_PALETTE[1], "Ocean"),
-            (WATER_PALETTE[2], "River"),
-            (WATER_PALETTE[3], "Major river"),
-            (WATER_PALETTE[4], "Lake"),
-            (WATER_PALETTE[5], "Inland sea (endorheic)"),
-            (WATER_PALETTE[6], "Wetland"),
-            (WATER_PALETTE[7], "Residual ice"),
-        ],
-    )
+        # 04 ice + surface water
+        name = "04_ice_surface_water.png"
+        _save_rgb(out_maps / name, _colorize_codes(world["water_code"], WATER_PALETTE))
+        written.append(name)
+        _legend_png(
+            out_legends / "04_ice_surface_water_legend.png",
+            "Ice / Surface Water",
+            [
+                (WATER_PALETTE[0], "Dry land"),
+                (WATER_PALETTE[1], "Ocean"),
+                (WATER_PALETTE[2], "River"),
+                (WATER_PALETTE[3], "Major river"),
+                (WATER_PALETTE[4], "Lake"),
+                (WATER_PALETTE[5], "Inland sea (endorheic)"),
+                (WATER_PALETTE[6], "Wetland"),
+                (WATER_PALETTE[7], "Residual ice"),
+                (WATER_PALETTE[8], "Salt pan / playa"),
+            ],
+        )
 
-    # 05 water table
-    name = "05_water_table.png"
-    _save_rgb(out_maps / name, _colorize_codes(world["wt_code"], WT_PALETTE))
-    written.append(name)
-    _legend_png(
-        out_legends / "05_water_table_legend.png",
-        "Water Table",
-        [
-            (WT_PALETTE[0], "Ocean"),
-            (WT_PALETTE[1], "Emergent / spring (≤1 m)"),
-            (WT_PALETTE[2], "Shallow (1–4 m)"),
-            (WT_PALETTE[3], "Moderate (4–12 m)"),
-            (WT_PALETTE[4], "Deep (12–25 m)"),
-            (WT_PALETTE[5], "Arid-deep (>25 m)"),
-            (WT_PALETTE[6], "Ice"),
-        ],
-    )
+        # 05 water table
+        name = "05_water_table.png"
+        _save_rgb(out_maps / name, _colorize_codes(world["wt_code"], WT_PALETTE))
+        written.append(name)
+        _legend_png(
+            out_legends / "05_water_table_legend.png",
+            "Water Table",
+            [
+                (WT_PALETTE[0], "Ocean"),
+                (WT_PALETTE[1], "Emergent / spring (≤1 m)"),
+                (WT_PALETTE[2], "Shallow (1–4 m)"),
+                (WT_PALETTE[3], "Moderate (4–12 m)"),
+                (WT_PALETTE[4], "Deep (12–25 m)"),
+                (WT_PALETTE[5], "Arid-deep (>25 m)"),
+                (WT_PALETTE[6], "Ice"),
+            ],
+        )
 
-    # 06 soil
-    soil_pal = {
-        0: (20, 40, 80),
-        1: (120, 110, 100),
-        2: (180, 180, 170),
-        3: (140, 120, 90),
-        4: (120, 90, 50),
-        5: (100, 80, 60),
-        6: (210, 190, 130),
-        7: (90, 70, 50),
-        8: (190, 160, 100),
-        9: (60, 80, 50),
-    }
-    name = "06_soil.png"
-    _save_rgb(out_maps / name, _colorize_codes(world["soil"], soil_pal))
-    written.append(name)
-    _legend_png(
-        out_legends / "06_soil_legend.png",
-        "Soil",
-        [(soil_pal[k], SOIL_LABELS[k]) for k in sorted(SOIL_LABELS)],
-    )
+        # 06 soil
+        soil_pal = {
+            0: (20, 40, 80),
+            1: (120, 110, 100),
+            2: (180, 180, 170),
+            3: (140, 120, 90),
+            4: (120, 90, 50),
+            5: (100, 80, 60),
+            6: (210, 190, 130),
+            7: (90, 70, 50),
+            8: (190, 160, 100),
+            9: (60, 80, 50),
+            10: (230, 220, 180),
+        }
+        name = "06_soil.png"
+        _save_rgb(out_maps / name, _colorize_codes(world["soil"], soil_pal))
+        written.append(name)
+        _legend_png(
+            out_legends / "06_soil_legend.png",
+            "Soil",
+            [(soil_pal[k], SOIL_LABELS[k]) for k in sorted(SOIL_LABELS)],
+        )
 
-    # 07 vegetation
-    veg_pal = {
-        0: (20, 40, 80),
-        1: (230, 240, 255),
-        2: (180, 200, 180),
-        3: (40, 100, 60),
-        4: (30, 140, 50),
-        5: (160, 190, 70),
-        6: (170, 150, 70),
-        7: (200, 170, 110),
-        8: (70, 110, 80),
-        9: (120, 160, 40),
-        10: (150, 170, 90),
-    }
-    name = "07_vegetation.png"
-    _save_rgb(out_maps / name, _colorize_codes(world["veg"], veg_pal))
-    written.append(name)
-    _legend_png(
-        out_legends / "07_vegetation_legend.png",
-        "Vegetation",
-        [(veg_pal[k], VEG_LABELS[k]) for k in sorted(VEG_LABELS)],
-    )
+        # 07 vegetation
+        veg_pal = {
+            0: (20, 40, 80),
+            1: (230, 240, 255),
+            2: (180, 200, 180),
+            3: (40, 100, 60),
+            4: (30, 140, 50),
+            5: (160, 190, 70),
+            6: (170, 150, 70),
+            7: (200, 170, 110),
+            8: (70, 110, 80),
+            9: (120, 160, 40),
+            10: (150, 170, 90),
+            11: (220, 210, 170),
+        }
+        name = "07_vegetation.png"
+        _save_rgb(out_maps / name, _colorize_codes(world["veg"], veg_pal))
+        written.append(name)
+        _legend_png(
+            out_legends / "07_vegetation_legend.png",
+            "Vegetation",
+            [(veg_pal[k], VEG_LABELS[k]) for k in sorted(VEG_LABELS)],
+        )
 
-    # 08 resources
-    res_pal = {
-        0: (50, 50, 50),
-        1: (40, 120, 40),
-        2: (140, 140, 140),
-        3: (180, 120, 40),
-        4: (100, 40, 100),
-        5: (240, 240, 220),
-        6: (160, 100, 70),
-        7: (40, 100, 180),
-        8: (80, 70, 40),
-        9: (200, 40, 160),
-    }
-    res_rgb = _colorize_codes(world["res_code"], res_pal)
-    res_rgb[elev < 0] = (20, 40, 80)
-    name = "08_resources.png"
-    _save_rgb(out_maps / name, res_rgb)
-    written.append(name)
-    _legend_png(
-        out_legends / "08_resources_legend.png",
-        "Resources (primary)",
-        [(res_pal[k], RES_LABELS[k]) for k in sorted(RES_LABELS)],
-    )
+        # 08 resources
+        res_pal = {
+            0: (50, 50, 50),
+            1: (40, 120, 40),
+            2: (140, 140, 140),
+            3: (180, 120, 40),
+            4: (100, 40, 100),
+            5: (240, 240, 220),
+            6: (160, 100, 70),
+            7: (40, 100, 180),
+            8: (80, 70, 40),
+            9: (200, 40, 160),
+            10: (180, 200, 80),
+        }
+        res_rgb = _colorize_codes(world["res_code"], res_pal)
+        res_rgb[elev < 0] = (20, 40, 80)
+        name = "08_resources.png"
+        _save_rgb(out_maps / name, res_rgb)
+        written.append(name)
+        _legend_png(
+            out_legends / "08_resources_legend.png",
+            "Resources (primary)",
+            [(res_pal[k], RES_LABELS[k]) for k in sorted(RES_LABELS)],
+        )
 
-    # 09 settlement
+
+    # 09 settlement (Cartographer packaging — always refresh)
+    h, w = elev.shape
     settle = world["settle_score"]
     srgb = _rgb_array(h, w)
     for r in range(h):
@@ -355,6 +368,13 @@ def _write_legends_md(out_legends: Path, write_geology_maps: bool) -> None:
             "Owned by Geologist when `data/geology_hex.csv` is present — see their map PNGs.",
             "",
         ]
+    lines += [
+        "## Ownership",
+        "- **Climate** owns maps 03–08 and `data/climate_hex.csv|.json`.",
+        "- **Cartographer** packages settlement map 09 / settle columns in `hexes.csv`.",
+        "- **Geologist** owns geology maps + `geology_hex.*` (never overwritten here).",
+        "",
+    ]
     for i, title in [
         (3, "climate_weather"),
         (4, "ice_surface_water"),
@@ -364,5 +384,6 @@ def _write_legends_md(out_legends: Path, write_geology_maps: bool) -> None:
         (8, "resources"),
         (9, "settlement_score"),
     ]:
-        lines += [f"## {i:02d} {title}", f"See `{i:02d}_{title}_legend.png`.", ""]
+        owner = "Climate" if i <= 8 else "Cartographer packaging"
+        lines += [f"## {i:02d} {title} ({owner})", f"See `{i:02d}_{title}_legend.png`.", ""]
     (out_legends / "LEGENDS.md").write_text("\n".join(lines), encoding="utf-8")

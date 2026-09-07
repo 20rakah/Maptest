@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""World Seed 01 generator — Cartographer pipeline.
+"""World Seed 01 generator — Climate V1 over Geologist CLEAR package.
 
 Usage:
   python -m src.generate [--seed N] [--sea-level M] [--ice F] [--rainfall F]
 
 If data/geology_hex.csv exists, ingest elev/lithology/glacial/endorheic/resource tags
 from Geologist and do NOT overwrite geology_hex.* or geology-owned map PNGs.
-Otherwise build toy geology from locked physical-history constraints.
+Climate owns maps 03–08 and data/climate_hex.*; settlement (09 / hexes settle cols)
+is Cartographer packaging still produced by this pipeline for convenience.
 """
 
 from __future__ import annotations
@@ -24,7 +25,7 @@ if str(ROOT) not in sys.path:
 from src import config as C
 from src.biosphere import build_resources, build_soil, build_vegetation, food_score
 from src.climate import build_climate
-from src.export import build_rows, write_csv_json
+from src.export import build_climate_rows, build_rows, write_csv_json
 from src.geology import apply_glacial_carving, build_elevation, build_plates_rock
 from src.geology_ingest import geology_data_present, load_geology_hex, should_write_geology_maps
 from src.hydrology import build_surface_water, build_water_table, residual_ice
@@ -71,9 +72,8 @@ def build_world(args: argparse.Namespace) -> dict:
     if geology_data_present(data_dir):
         print(f"Ingesting Geologist data: {data_dir / 'geology_hex.csv'}")
         geo_loaded = load_geology_hex(data_dir)
-        elev = geo_loaded["elev_m"] - args.sea_level  # sea-level knob still applies
+        elev = geo_loaded["elev_m"] - args.sea_level
         endorheic = geo_loaded["endorheic"]
-        # Endorheic floor flooded by sea-level knob becomes inland sea, not open ocean
         is_ocean = (elev < 0) & ~endorheic
         slope = geo_loaded["slope"]
         rock = geo_loaded["rock"]
@@ -82,19 +82,15 @@ def build_world(args: argparse.Namespace) -> dict:
         glacial = geo_loaded["glacial"]
         glacial_scar = geo_loaded.get("glacial_scar")
         geo_res_tag = geo_loaded["geology_resource_tag"]
-        # Optional: if Geologist did not carve, apply light toy carve only where glacial flagged
-        # (do not invent conflicting geology — carving already in their elev)
         geology_source = geo_loaded.get("source", "geology_hex.csv")
     else:
         print("No data/geology_hex.csv — using Cartographer toy geology (locked history constraints)")
         geo = build_plates_rock(seed)
         elev_pack = build_elevation(seed, geo, args.sea_level)
         elev = apply_glacial_carving(elev_pack["elev_m"], seed, args.ice)
-        # Keep endorheic basin closed above global sea (inland sea, not ocean)
         endorheic = geo["basin_dist"] < 1.0
         elev = elev.copy()
         elev[endorheic] = np.maximum(elev[endorheic], 35.0)
-        # refresh slope after carve
         from src.geology import _slope_m_per_km
 
         slope = _slope_m_per_km(elev)
@@ -109,10 +105,24 @@ def build_world(args: argparse.Namespace) -> dict:
         is_ocean = (elev < 0) & ~endorheic
         geology_source = "toy"
 
-    climate = build_climate(seed, elev, qf, rf, args.rainfall)
+    # Ice first so climate can apply melt effects
     ice = residual_ice(elev, qf, rf, args.ice, glacial_mask=glacial)
-    surface = build_surface_water(seed, elev, climate["precip_mm"], ice, endorheic, is_ocean)
-    wt = build_water_table(elev, climate["precip_mm"], surface, seed)
+    climate = build_climate(
+        seed,
+        elev,
+        qf,
+        rf,
+        args.rainfall,
+        endorheic=endorheic,
+        glacial_mask=glacial,
+        ice=ice,
+    )
+    surface = build_surface_water(
+        seed, elev, climate["precip_mm"], ice, endorheic, is_ocean
+    )
+    wt = build_water_table(
+        elev, climate["precip_mm"], surface, seed, endorheic=endorheic
+    )
     soil = build_soil(
         elev,
         slope,
@@ -121,6 +131,8 @@ def build_world(args: argparse.Namespace) -> dict:
         surface["wetland"],
         glacial,
         climate["precip_mm"],
+        salt_pan=surface.get("salt_pan"),
+        floodplain=surface.get("floodplain"),
     )
     veg = build_vegetation(
         elev,
@@ -129,11 +141,21 @@ def build_world(args: argparse.Namespace) -> dict:
         surface["ice"],
         surface["wetland"],
         surface["river"] | surface["major_river"],
-        surface["lake"],
+        surface["lake"] | surface.get("inland_sea", np.zeros_like(elev, dtype=bool)),
         soil,
+        salt_pan=surface.get("salt_pan"),
+        floodplain=surface.get("floodplain"),
+        inland_sea=surface.get("inland_sea"),
     )
-    res_code, res_tags = build_resources(
-        seed, rock, elev, veg, surface["water_code"], geo_res_tag
+    res_code, res_tags, climate_resource_tags = build_resources(
+        seed,
+        rock,
+        elev,
+        veg,
+        surface["water_code"],
+        geo_res_tag,
+        salt_pan=surface.get("salt_pan"),
+        endorheic=endorheic,
     )
     food = food_score(veg, surface["water_code"])
     settle = score_settlements(
@@ -149,6 +171,7 @@ def build_world(args: argparse.Namespace) -> dict:
 
     return {
         "geology_source": geology_source,
+        "climate_owner": "Climate",
         "elev_m": elev,
         "slope": slope,
         "rock": rock,
@@ -165,6 +188,7 @@ def build_world(args: argparse.Namespace) -> dict:
         "veg": veg,
         "res_code": res_code,
         "res_tags": res_tags,
+        "climate_resource_tags": climate_resource_tags,
         "food": food,
         **settle,
         "seed": seed,
@@ -183,10 +207,11 @@ def run(args: argparse.Namespace) -> int:
     legends.mkdir(parents=True, exist_ok=True)
     data.mkdir(parents=True, exist_ok=True)
 
-    # HARD RULE: never overwrite Geologist-owned tables
-    for banned in ("geology_hex.csv", "geology_hex.json"):
-        # We simply never write these filenames.
-        pass
+    # Snapshot geology hashes before run to prove non-overwrite
+    geo_csv = data / "geology_hex.csv"
+    geo_json = data / "geology_hex.json"
+    pre_csv = geo_csv.read_bytes() if geo_csv.is_file() else None
+    pre_json = geo_json.read_bytes() if geo_json.is_file() else None
 
     world = build_world(args)
     write_geo_maps = should_write_geology_maps(data)
@@ -195,9 +220,18 @@ def run(args: argparse.Namespace) -> int:
 
     written = render_all_layers(maps, legends, world, write_geology_maps=write_geo_maps)
     rows = build_rows(world)
-    write_csv_json(rows, data)
+    write_csv_json(rows, data, stem="hexes")
+    climate_rows = build_climate_rows(world)
+    write_csv_json(climate_rows, data, stem="climate_hex")
 
-    # meta stamp for reproducibility
+    # Prove geology untouched
+    if pre_csv is not None and geo_csv.read_bytes() != pre_csv:
+        print("FATAL: geology_hex.csv was modified")
+        return 2
+    if pre_json is not None and geo_json.read_bytes() != pre_json:
+        print("FATAL: geology_hex.json was modified")
+        return 2
+
     meta = out / "data" / "run_meta.txt"
     meta.write_text(
         "\n".join(
@@ -210,6 +244,7 @@ def run(args: argparse.Namespace) -> int:
                 f"hex_count={C.HEX_COUNT}",
                 f"hex_km={C.HEX_KM}",
                 f"geology_source={world['geology_source']}",
+                f"climate_owner=Climate",
                 f"maps={','.join(written)}",
             ]
         )
@@ -218,12 +253,27 @@ def run(args: argparse.Namespace) -> int:
     )
 
     errs = validate_data_dir(data)
+    # Also validate climate_hex
+    clim_csv = data / "climate_hex.csv"
+    if not clim_csv.is_file():
+        errs.append("missing climate_hex.csv")
+    else:
+        import csv as _csv
+
+        with clim_csv.open(newline="", encoding="utf-8") as f:
+            crows = list(_csv.DictReader(f))
+        if len(crows) != C.HEX_COUNT:
+            errs.append(f"climate_hex.csv rows {len(crows)} != {C.HEX_COUNT}")
+
     if errs:
         print("VALIDATE FAIL:")
         for e in errs:
             print(" -", e)
         return 1
-    print(f"OK seed={args.seed} hexes={C.HEX_COUNT} maps={len(written)} geology={world['geology_source']}")
+    print(
+        f"OK seed={args.seed} hexes={C.HEX_COUNT} maps={len(written)} "
+        f"geology={world['geology_source']} climate_owner=Climate"
+    )
     return 0
 
 

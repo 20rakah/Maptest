@@ -49,6 +49,7 @@ def score_settlements(
     raw -= np.where(ice, 5.0, 0.0)
     arid_no_water = land & (food < 0.5) & ~fresh & (water_code == 0)
     raw -= np.where(arid_no_water, 3.0, 0.0)
+    raw -= np.where(water_code == 8, 2.5, 0.0)  # salt pan / playa
     deep_marsh = (veg == 8) & (water_code == 6) & (slope < 2)
     raw -= np.where(deep_marsh, 1.5, 0.0)
     raw -= np.where(food < 0.3, 1.5, 0.0)
